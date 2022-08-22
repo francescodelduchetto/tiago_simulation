@@ -1,85 +1,34 @@
-<sdf version='1.6'>
-  <world name='default'>
-    <physics name='default_physics' default='0' type='ode'>
+
+
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <physics type="ode">
+      <gravity>0 0 -9.81</gravity>
       <ode>
         <solver>
           <type>quick</type>
           <iters>20</iters>
-          <sor>1</sor>
-          <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
+          <sor>1.0</sor>
         </solver>
         <constraints>
-          <cfm>0</cfm>
+          <cfm>0.0</cfm>
           <erp>0.2</erp>
-          <contact_max_correcting_vel>100</contact_max_correcting_vel>
-          <contact_surface_layer>0</contact_surface_layer>
+          <contact_max_correcting_vel>100.0</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
         </constraints>
       </ode>
       <real_time_update_rate>1000</real_time_update_rate>
       <max_step_size>0.001</max_step_size>
-      <real_time_factor>1</real_time_factor>
     </physics>
-    <light name='sun' type='directional'>
-      <cast_shadows>1</cast_shadows>
-      <pose frame=''>0 0 10 0 -0 0</pose>
-      <diffuse>0.8 0.8 0.8 1</diffuse>
-      <specular>0.2 0.2 0.2 1</specular>
-      <attenuation>
-        <range>1000</range>
-        <constant>0.9</constant>
-        <linear>0.01</linear>
-        <quadratic>0.001</quadratic>
-      </attenuation>
-      <direction>-0.5 0.1 -0.9</direction>
-    </light>
-    <model name='ground_plane'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <surface>
-            <contact>
-              <collide_bitmask>65535</collide_bitmask>
-              <ode/>
-            </contact>
-            <friction>
-              <ode>
-                <mu>100</mu>
-                <mu2>50</mu2>
-              </ode>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <bounce/>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual'>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-    </model>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
     <model name='wall_1_model'>
       <pose frame=''>0 -5 1 0 -0 0</pose>
       <static>1</static>
@@ -269,7 +218,7 @@
       </link>
     </model>
     <model name='wall_5_model'>
-      <pose frame=''>-2 5 1 0 -0 0</pose>
+      <pose frame=''>-2.5 5 1 0 -0 0</pose>
       <static>1</static>
       <link name='wall_5_body'>
         <inertial>
@@ -286,7 +235,7 @@
         <collision name='collision'>
           <geometry>
             <box>
-              <size>6 0.2 2</size>
+              <size>5 0.2 2</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -306,7 +255,7 @@
         <visual name='visual'>
           <geometry>
             <box>
-              <size>6 0.2 2</size>
+              <size>5 0.2 2</size>
             </box>
           </geometry>
         </visual>
@@ -316,7 +265,7 @@
       </link>
     </model>
     <model name='wall_6_model'>
-      <pose frame=''>3.5 5 1 0 -0 0</pose>
+      <pose frame=''>3.43 5 1 0 -0 0</pose>
       <static>1</static>
       <link name='wall_6_body'>
         <inertial>
@@ -333,7 +282,7 @@
         <collision name='collision'>
           <geometry>
             <box>
-              <size>3 0.2 2</size>
+              <size>5 0.2 2</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -353,7 +302,7 @@
         <visual name='visual'>
           <geometry>
             <box>
-              <size>3 0.2 2</size>
+              <size>5 0.2 2</size>
             </box>
           </geometry>
         </visual>
@@ -362,472 +311,71 @@
         <kinematic>0</kinematic>
       </link>
     </model>
-    <model name='dining_chair'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='colision1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://dining_chair/meshes/dining_chair.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://dining_chair/meshes/dining_chair.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Wood</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>2.5 -4.5 0.01 0 -0 0</pose>
-    </model>
-    <model name='kitchen_table'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='colision1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://kitchen_table/meshes/kitchen_table.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://kitchen_table/meshes/kitchen_table.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/FlatBlack</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>2 -3.55106 0 0 -0 0</pose>
-    </model>
-    <model name='wardrobe'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='colision1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://wardrobe/meshes/wardrobe.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://wardrobe/meshes/wardrobe.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/WoodPallet</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>2 9 0 0 -0 0</pose>
-    </model>
-    <model name='closet'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='colision1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://closet/meshes/closet.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://closet/meshes/closet.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/WoodFloor</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>-4 -5 0 0 -0 0</pose>
-    </model>
-    <model name='bench'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='colision1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://bench/meshes/bench.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://bench/meshes/bench.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Wood</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>-4.46543 1.50271 0 0 -0 0</pose>
-    </model>
-    <model name='sofa'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='colision1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://sofa/meshes/sofa.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://sofa/meshes/sofa.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/PaintedWall</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>-0.518195 9 0 0 -0 0</pose>
-    </model>
-    <model name='floor_lamp_0'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='colision1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://floor_lamp/meshes/floor_lamp.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://floor_lamp/meshes/floor_lamp.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>-1 9.41735 0 0 -0 0</pose>
-    </model>
-    <model name='floor_lamp_1'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='colision1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://floor_lamp/meshes/floor_lamp.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <bounce/>
-            <friction>
-              <ode/>
-              <torsional>
-                <ode/>
-              </torsional>
-            </friction>
-            <contact>
-              <ode/>
-            </contact>
-          </surface>
-          <max_contacts>10</max_contacts>
-        </collision>
-        <visual name='visual1'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://floor_lamp/meshes/floor_lamp.stl</uri>
-              <scale>1 1 1</scale>
-            </mesh>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Grey</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>4 4 0 0 -0 0</pose>
-    </model>
-    <model name='male03'>
-      <link name='link'>
-        <inertial>
-          <mass>20</mass>
-          <inertia>
-            <ixx>0</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0</iyy>
-            <iyz>0</iyz>
-            <izz>0</izz>
-          </inertia>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_male_03/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_male_03/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose frame=''>4 0.53 0.01 0.0125 0.0023 -1.718</pose>
-    </model>
-    <light name='male03light' type='point'>
-      <pose frame=''>3.6 0.53 1.6 0 -0 0</pose>
+    <!-- Add a chair -->
+    <include>
+      <uri>model://dining_chair</uri>
+      <pose>2.5 -4.5 0.01 0 0 0</pose>
+    </include>
+    <!-- Include a door -->
+    <include>
+      <uri>model://drc_practice_hinged_door</uri>
+      <pose>0.0 5 0.01 0 -0 0</pose>
+    </include>
+    <!-- Add a kitchen table -->
+    <include>
+      <uri>model://kitchen_table</uri>
+      <pose>2.000000 -3.551060 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+    <!-- Add a wardrobe -->
+    <include>
+      <uri>model://wardrobe</uri>
+      <pose>2.000000 9.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+    <!-- Add a closet -->
+    <include>
+      <uri>model://closet</uri>
+      <pose>-4.000000 -5.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+    <!-- Add a bench -->
+    <include>
+      <uri>model://bench</uri>
+      <pose>-4.465430 1.502710 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+    <!-- Add a sofa -->
+    <include>
+      <uri>model://sofa</uri>
+      <pose>-0.518195 9.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+    <!-- Add a floor lamp -->
+    <include>
+      <name>floor_lamp_0</name>
+      <uri>model://floor_lamp</uri>
+      <pose>-1.000000 9.417350 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+    <!-- Add a floor lamp -->
+    <include>
+      <name>floor_lamp_1</name>
+      <uri>model://floor_lamp</uri>
+      <pose>4.000000 4.00000 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+    <!-- Add male 03 -->
+    <include>
+      <name>male03</name>
+      <uri>model://citizen_extras_male_03</uri>
+      <pose>4.0 0.53 0.01 0.0125 0.0023 -1.718</pose>
+    </include>
+
+    <light type="point" name="male03light">
+      <!-- Light in front of the face of the model -->
+      <pose>3.6 0.53 1.6 0 0 0</pose>
       <diffuse>0.5 0.5 0.5 1</diffuse>
       <specular>0.1 0.1 0.1 1</specular>
       <attenuation>
-        <range>1</range>
+        <!-- short range so it doesn't light the ground -->
+        <range>1.0</range>
         <linear>0.01</linear>
         <constant>0.3</constant>
-        <quadratic>0</quadratic>
+        <quadratic>0.0</quadratic>
       </attenuation>
       <direction>0 0 -1</direction>
       <spot>
@@ -835,66 +383,27 @@
         <outer_angle>0.8</outer_angle>
         <falloff>1.2</falloff>
       </spot>
-      <cast_shadows>0</cast_shadows>
+      <cast_shadows>false</cast_shadows>
     </light>
-    <model name='female02'>
-      <link name='link'>
-        <inertial>
-          <mass>20</mass>
-          <inertia>
-            <ixx>0</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0</iyy>
-            <iyz>0</iyz>
-            <izz>0</izz>
-          </inertia>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_female_02/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_female_02/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose frame=''>-2.84 -2.63 0.01 0 -0.025 1.683</pose>
-    </model>
-    <light name='female02light' type='point'>
-      <pose frame=''>-2.5 -2.63 1.5 0 -0 0</pose>
+
+    <!-- Add female 02 -->
+    <include>
+      <name>female02</name>
+      <uri>model://citizen_extras_female_02</uri>
+      <pose>-2.84 -2.63 0.01 0 -0.025 1.683</pose>
+    </include>
+  
+    <light type="point" name="female02light">
+      <!-- Light in front of the face of the model -->
+      <pose>-2.5 -2.63 1.5 0 0 0</pose>
       <diffuse>0.5 0.5 0.5 1</diffuse>
       <specular>0.1 0.1 0.1 1</specular>
       <attenuation>
-        <range>1</range>
+        <!-- short range so it doesn't light the ground -->
+        <range>1.0</range>
         <linear>0.01</linear>
         <constant>0.3</constant>
-        <quadratic>0</quadratic>
+        <quadratic>0.0</quadratic>
       </attenuation>
       <direction>0 0 -1</direction>
       <spot>
@@ -902,66 +411,28 @@
         <outer_angle>0.8</outer_angle>
         <falloff>1.2</falloff>
       </spot>
-      <cast_shadows>0</cast_shadows>
+      <cast_shadows>false</cast_shadows>
     </light>
-    <model name='female03'>
-      <link name='link'>
-        <inertial>
-          <mass>20</mass>
-          <inertia>
-            <ixx>0</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0</iyy>
-            <iyz>0</iyz>
-            <izz>0</izz>
-          </inertia>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_female_03/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_female_03/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose frame=''>-3.3 5.8 0.01 0.011 0.0126 1.6451</pose>
-    </model>
-    <light name='female03light' type='point'>
-      <pose frame=''>-3 6.2 1.5 0 -0 0</pose>
+
+
+    <!-- Add female 03 -->
+    <include>
+      <name>female03</name>
+      <uri>model://citizen_extras_female_03</uri>
+      <pose>-3.3 5.8 0.01 0.011 0.0126 1.6451</pose>
+    </include>
+
+    <light type="point" name="female03light">
+      <!-- Light in front of the face of the model -->
+      <pose>-3.0 6.2 1.5 0 0 0</pose>
       <diffuse>0.5 0.5 0.5 1</diffuse>
       <specular>0.1 0.1 0.1 1</specular>
       <attenuation>
-        <range>1</range>
+        <!-- short range so it doesn't light the ground -->
+        <range>1.0</range>
         <linear>0.01</linear>
         <constant>0.3</constant>
-        <quadratic>0</quadratic>
+        <quadratic>0.0</quadratic>
       </attenuation>
       <direction>0 0 -1</direction>
       <spot>
@@ -969,316 +440,18 @@
         <outer_angle>0.8</outer_angle>
         <falloff>1.2</falloff>
       </spot>
-      <cast_shadows>0</cast_shadows>
+      <cast_shadows>false</cast_shadows>
     </light>
-    <model name='female02bis'>
-      <link name='link'>
-        <inertial>
-          <mass>20</mass>
-          <inertia>
-            <ixx>0</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0</iyy>
-            <iyz>0</iyz>
-            <izz>0</izz>
-          </inertia>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_female_02/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_female_02/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose frame=''>4 7 0 0 -0 0</pose>
-    </model>
-    <light name='female02bislight' type='point'>
-      <pose frame=''>3.8 6.7 1.5 0 -0 0</pose>
-      <diffuse>0.5 0.5 0.5 1</diffuse>
-      <specular>0.1 0.1 0.1 1</specular>
-      <attenuation>
-        <range>1</range>
-        <linear>0.01</linear>
-        <constant>0.3</constant>
-        <quadratic>0</quadratic>
-      </attenuation>
-      <direction>0 0 -1</direction>
-      <spot>
-        <inner_angle>0.6</inner_angle>
-        <outer_angle>0.8</outer_angle>
-        <falloff>1.2</falloff>
-      </spot>
-      <cast_shadows>0</cast_shadows>
-    </light>
-    <model name='male03bis'>
-      <link name='link'>
-        <inertial>
-          <mass>20</mass>
-          <inertia>
-            <ixx>0</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0</iyy>
-            <iyz>0</iyz>
-            <izz>0</izz>
-          </inertia>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_male_03/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://citizen_extras_male_03/meshes/mesh.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose frame=''>-3 4 0 0 -0 0</pose>
-    </model>
-    <light name='male03bislight' type='point'>
-      <pose frame=''>-2.9 3.7 1.5 0 -0 0</pose>
-      <diffuse>0.5 0.5 0.5 1</diffuse>
-      <specular>0.1 0.1 0.1 1</specular>
-      <attenuation>
-        <range>1</range>
-        <linear>0.01</linear>
-        <constant>0.3</constant>
-        <quadratic>0</quadratic>
-      </attenuation>
-      <direction>0 0 -1</direction>
-      <spot>
-        <inner_angle>0.6</inner_angle>
-        <outer_angle>0.8</outer_angle>
-        <falloff>1.2</falloff>
-      </spot>
-      <cast_shadows>0</cast_shadows>
-    </light>
-    <gui fullscreen='0'>
-      <camera name='user_camera'>
-        <pose frame=''>1.16464 2.11098 3.15314 0 0.565796 1.42198</pose>
-        <view_controller>orbit</view_controller>
-        <projection_type>perspective</projection_type>
-      </camera>
-    </gui>
-    <gravity>0 0 -9.81</gravity>
-    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
-    <atmosphere type='adiabatic'/>
-    <scene>
-      <ambient>0.4 0.4 0.4 1</ambient>
-      <background>0.7 0.7 0.7 1</background>
-      <shadows>1</shadows>
-    </scene>
-    <wind/>
-    <spherical_coordinates>
-      <surface_model>EARTH_WGS84</surface_model>
-      <latitude_deg>0</latitude_deg>
-      <longitude_deg>0</longitude_deg>
-      <elevation>0</elevation>
-      <heading_deg>0</heading_deg>
-    </spherical_coordinates>
-    <model name='door_obstacle'>
-      <static>1</static>
-      <link name='door_obstacle_link'>
-        <collision name='door_obstacle_collision'>
-          <pose frame=''>0 0 0.0075 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>1 0.05 0.015</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='door_obstacle_visual'>
-          <pose frame=''>0 0 0.0075 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>1 0.05 0.015</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/Black</name>
-            </script>
-          </material>
-        </visual>
-        <velocity_decay>
-          <linear>0</linear>
-          <angular>0</angular>
-        </velocity_decay>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-        <enable_wind>0</enable_wind>
-      </link>
-      <pose frame=''>-0.86194 20.5964 0 0 -0 0</pose>
-    </model>
-    <model name='door_handle'>
-      <link name='handle'>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>model://door_handle/meshes/door_handle.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://door_handle/meshes/door_handle.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <inertial>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-          <mass>1</mass>
-        </inertial>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose frame=''>-2.08398 13.5245 0 0 -0 0</pose>
-    </model>
-    <state world_name='default'>
-      <sim_time>1773 756000000</sim_time>
-      <real_time>453 188834214</real_time>
-      <wall_time>1659626351 109459673</wall_time>
-      <iterations>439249</iterations>
-      <model name='bench'>
-        <pose frame=''>-4.46543 1.50271 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-4.46543 1.50271 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='closet'>
-        <pose frame=''>-4 -5 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-4 -5 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='dining_chair'>
-        <pose frame=''>2.5 -4.5 0.01 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>2.5 -4.5 0.01 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='door_handle'>
-        <pose frame=''>-2.77802 12.6731 0.000781 0.015486 0.000297 -0.390197</pose>
-        <scale>1 1 1</scale>
-        <link name='handle'>
-          <pose frame=''>-2.77802 12.6731 0.000781 0.015486 0.000297 -0.390197</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.81 0 -0 0</acceleration>
-          <wrench>0 0 -9.81 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='door_obstacle'>
-        <pose frame=''>-0.86194 20.5964 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='door_obstacle_link'>
-          <pose frame=''>-0.86194 20.5964 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
+
+    <!-- Add female 02 bis -->
+    <include>
+      <name>female02bis</name>
+      <uri>model://citizen_extras_female_02</uri>
+      <pose>4.000000 7.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+
+
+    <!-- Add a door -->
       <model name='drc_practice_weighted_door'>
         <pose frame=''>0.167665 4.97339 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -1301,457 +474,65 @@
           <wrench>-7e-06 1e-06 -3e-05 0 -0 0</wrench>
         </link>
       </model>
-      <model name='female02'>
-        <pose frame=''>-2.84 -2.63 0.000427 0.001609 -0.025081 1.68295</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-2.84 -2.63 0.000427 0.001609 -0.025081 1.68295</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.000129 0.000588 -0.010169 0 -0 0</acceleration>
-          <wrench>-0.002581 0.011759 -0.203388 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='female02bis'>
-        <pose frame=''>3.99997 7.00001 0.000427 0.001615 -0.025131 -0.000182</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>3.99997 7.00001 0.000427 0.001615 -0.025131 -0.000182</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.000534 0.000698 0.08876 0 -0 0</acceleration>
-          <wrench>0.010678 0.01396 1.77519 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='female03'>
-        <pose frame=''>-3.3 5.8 -0.003501 0.011366 0.012675 1.64515</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-3.3 5.8 -0.003501 0.011366 0.012675 1.64515</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.00511 0.004921 0.07672 0 -0 0</acceleration>
-          <wrench>0.102194 0.09843 1.53441 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='floor_lamp_0'>
-        <pose frame=''>-1 9.41735 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-1 9.41735 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='floor_lamp_1'>
-        <pose frame=''>4 4 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>4 4 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='ground_plane'>
-        <pose frame=''>0 0 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='kitchen_table'>
-        <pose frame=''>2 -3.55106 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>2 -3.55106 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='male03'>
-        <pose frame=''>4 0.53 0.010902 0.012558 0.002318 -1.718</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>4 0.53 0.010902 0.012558 0.002318 -1.718</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.81 0 -0 0</acceleration>
-          <wrench>0 0 -196.2 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='male03bis'>
-        <pose frame=''>-2.99993 3.99987 0.010907 0.012577 0.002292 0.000158</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-2.99993 3.99987 0.010907 0.012577 0.002292 0.000158</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 -9.81 0 -0 0</acceleration>
-          <wrench>0 0 -196.2 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='sofa'>
-        <pose frame=''>-0.518195 9 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>-0.518195 9 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='wall_1_model'>
-        <pose frame=''>0 -5 1 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='wall_1_body'>
-          <pose frame=''>0 -5 1 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='wall_2_model'>
-        <pose frame=''>0 10 1 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='wall_2_body'>
-          <pose frame=''>0 10 1 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='wall_3_model'>
-        <pose frame=''>-5 2.5 1 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='wall_3_body'>
-          <pose frame=''>-5 2.5 1 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='wall_4_model'>
-        <pose frame=''>5 2.5 1 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='wall_4_body'>
-          <pose frame=''>5 2.5 1 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='wall_5_model'>
-        <pose frame=''>-2.84137 5 1 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='wall_5_body'>
-          <pose frame=''>-2.84137 5 1 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='wall_6_model'>
-        <pose frame=''>3.40222 4.98467 1 0 -0 0</pose>
-        <scale>1.54021 1 1</scale>
-        <link name='wall_6_body'>
-          <pose frame=''>3.40222 4.98467 1 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='wardrobe'>
-        <pose frame=''>2 9 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>2 9 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <light name='female02bislight'>
-        <pose frame=''>3.8 6.7 1.5 0 -0 0</pose>
-      </light>
-      <light name='female02light'>
-        <pose frame=''>-2.5 -2.63 1.5 0 -0 0</pose>
-      </light>
-      <light name='female03light'>
-        <pose frame=''>-3 6.2 1.5 0 -0 0</pose>
-      </light>
-      <light name='male03bislight'>
-        <pose frame=''>-2.9 3.7 1.5 0 -0 0</pose>
-      </light>
-      <light name='male03light'>
-        <pose frame=''>3.6 0.53 1.6 0 -0 0</pose>
-      </light>
-      <light name='sun'>
-        <pose frame=''>0 0 10 0 -0 0</pose>
-      </light>
-    </state>
-    <model name='drc_practice_weighted_door'>
-      <link name='frame'>
-        <pose frame=''>0.06 -0.0005 0 0 -0 0</pose>
-        <inertial>
-          <pose frame=''>-0.025145 -0.03429 1.0541 0 -0 0</pose>
-          <mass>19</mass>
-          <inertia>
-            <ixx>7.04458</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>7.04114</iyy>
-            <iyz>0</iyz>
-            <izz>0.0114511</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision_2'>
-          <pose frame=''>-0.025145 -0.03429 1.0541 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.05029 0.06858 2.1082</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <pose frame=''>-0.025145 -0.03429 1.0541 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.05029 0.06858 2.1082</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>file://media/materials/scripts/gazebo.material</uri>
-              <name>Gazebo/White</name>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <link name='door'>
-        <pose frame=''>-0 0 2.04 3.14159 -0 0</pose>
-        <inertial>
-          <mass>41.3256</mass>
-          <pose frame=''>0.4569 0.0349 1.016 0 -0 0</pose>
-          <inertia>
-            <ixx>14.2263</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>17.099</iyy>
-            <iyz>0</iyz>
-            <izz>2.88626</izz>
-          </inertia>
-        </inertial>
-        <collision name='collision'>
-          <pose frame=''>0.4569 0.0349 1.016 0 -0 0</pose>
-          <geometry>
-            <box>
-              <size>0.9144 0.04445 2.032</size>
-            </box>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <pose frame=''>0 -0.06858 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://hinged_door/meshes/door.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <link name='handles'>
-        <pose frame=''>0.8144 -0.07 1.05 0 -0 3.14159</pose>
-        <inertial>
-          <pose frame=''>0 -0.035 0 0 -0 0</pose>
-          <mass>2</mass>
-          <inertia>
-            <ixx>0.0110115</ixx>
-            <ixy>-0</ixy>
-            <ixz>-0.00647057</ixz>
-            <iyy>0.0190181</iyy>
-            <iyz>0</iyz>
-            <izz>0.00824372</izz>
-          </inertia>
-        </inertial>
-        <collision name='handle1_collision'>
-          <pose frame=''>0.015 -0.015 0 -1.57 0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://door_handle/meshes/handle.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='handle1_visual'>
-          <pose frame=''>0.015 -0.015 0 -1.57 0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://door_handle/meshes/handle.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <collision name='handle2_collision'>
-          <pose frame=''>0.015 -0.055 0 1.57 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://door_handle/meshes/handle.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='handle2_visual'>
-          <pose frame=''>0.015 -0.055 0 1.57 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>model://door_handle/meshes/handle.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <joint name='handle' type='revolute'>
-        <parent>door</parent>
-        <child>handles</child>
-        <pose frame=''>0.015 0 0 0 -0 0</pose>
-        <axis>
-          <xyz>0 1 0</xyz>
-          <limit>
-            <lower>-1.58</lower>
-            <upper>0</upper>
-          </limit>
-          <dynamics>
-            <damping>1</damping>
-            <friction>10</friction>
-            <spring_reference>0</spring_reference>
-            <spring_stiffness>0</spring_stiffness>
-          </dynamics>
-          <use_parent_model_frame>1</use_parent_model_frame>
-          <use_parent_model_frame>1</use_parent_model_frame>
-        </axis>
-        <physics>
-          <ode>
-            <cfm_damping>1</cfm_damping>
-            <limit>
-              <cfm>0</cfm>
-              <erp>0.2</erp>
-            </limit>
-          </ode>
-        </physics>
-      </joint>
-      <joint name='hinge' type='revolute'>
-        <parent>frame</parent>
-        <child>door</child>
-        <axis>
-          <xyz>0 0 1</xyz>
-          <limit>
-            <lower>-1.58</lower>
-            <upper>0</upper>
-          </limit>
-          <dynamics>
-            <damping>15.5365</damping>
-            <friction>15.5365</friction>
-            <spring_reference>0</spring_reference>
-            <spring_stiffness>0</spring_stiffness>
-          </dynamics>
-          <use_parent_model_frame>1</use_parent_model_frame>
-          <use_parent_model_frame>1</use_parent_model_frame>
-        </axis>
-        <physics>
-          <ode>
-            <cfm_damping>1</cfm_damping>
-            <limit>
-              <cfm>0</cfm>
-              <erp>0.2</erp>
-            </limit>
-          </ode>
-        </physics>
-      </joint>
-      <joint name='world_joint' type='revolute'>
-        <child>frame</child>
-        <parent>world</parent>
-        <axis>
-          <limit>
-            <lower>0</lower>
-            <upper>0</upper>
-          </limit>
-          <xyz>0 1 0</xyz>
-          <dynamics>
-            <damping>1</damping>
-            <spring_reference>0</spring_reference>
-            <spring_stiffness>0</spring_stiffness>
-          </dynamics>
-          <use_parent_model_frame>1</use_parent_model_frame>
-          <use_parent_model_frame>1</use_parent_model_frame>
-        </axis>
-        <physics>
-          <ode>
-            <cfm_damping>1</cfm_damping>
-            <limit>
-              <cfm>0</cfm>
-              <erp>0.2</erp>
-            </limit>
-          </ode>
-        </physics>
-      </joint>
-      <pose frame=''>0.167662 4.97339 0 0 -0 0</pose>
-    </model>
+
+
+    <light type="point" name="female02bislight">
+      <!-- Light in front of the face of the model -->
+      <pose>3.8 6.7 1.5 0 0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <!-- short range so it doesn't light the ground -->
+        <range>1.0</range>
+        <linear>0.01</linear>
+        <constant>0.3</constant>
+        <quadratic>0.0</quadratic>
+      </attenuation>
+      <direction>0 0 -1</direction>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>0.8</outer_angle>
+        <falloff>1.2</falloff>
+      </spot>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <!-- Add male 03 bis -->
+    <include>
+      <name>male03bis</name>
+      <uri>model://citizen_extras_male_03</uri>
+      <pose>-3.000000 4.000000 0.000000 0.000000 0.000000 0.000000</pose>
+    </include>
+
+    <light type="point" name="male03bislight">
+      <!-- Light in front of the face of the model -->
+      <pose>-2.9 3.7 1.5 0 0 0</pose>
+      <diffuse>0.5 0.5 0.5 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <!-- short range so it doesn't light the ground -->
+        <range>1.0</range>
+        <linear>0.01</linear>
+        <constant>0.3</constant>
+        <quadratic>0.0</quadratic>
+      </attenuation>
+      <direction>0 0 -1</direction>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>0.8</outer_angle>
+        <falloff>1.2</falloff>
+      </spot>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <!-- Change the gazebo camera point of view -->
+    <gui fullscreen="0">
+      <camera name="user_camera">
+        <pose>0.685291 2.730300 18.477800 0.000000 1.529800 -3.138990</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
   </world>
 </sdf>
+
+
